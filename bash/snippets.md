@@ -17,5 +17,5 @@ ip add show <device name> | awk '/inet /{print $2}'
 
 ## Stop all docker container
 ~~~bash
-docker stop $(docker ps-a -q)
+docker stop $(docker ps -a -q)
 ~~~
