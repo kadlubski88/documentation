@@ -1,4 +1,4 @@
-# RUST
+# RUST basics
 ## features
 - good multi-thrading
 - type 
@@ -103,7 +103,7 @@ fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 ~~~
-The output of the last statement will be returned
+The output of the last statement will be returned.
 "return" can also be used.
 
 ## println macro
@@ -173,4 +173,39 @@ enum Direction {
     left,
     right
 }
+~~~
+
+## unwrap, unwrap_or_else, expect
+Most of the rust functions returns an Enum with an Ok or an Err.
+~~~rust
+enum Result<T, E> {
+    Ok(T),
+    Err(E)
+}
+~~~
+### unwrap()
+Unwrap will return the data for the `Ok` variant and panik for the `Err` variant.
+~~~rust
+let variable = function().unwrap();
+~~~
+### unwrap_or_else(closure)
+This function will return the data for the `Ok` variant and run the closure for the `Err` variant.
+~~~rust
+let variable = function().unwrap_or_else(|error| {
+    panik!("Error: {:?}", error);
+});
+~~~
+### expect(string)
+This function will return the data for the `Ok` variant and panik with the given string for the `Err` variant.
+~~~rust
+let variable = function().expect("Error string");
+~~~
+
+## closure (anonymous function)
+~~~rust
+let closure = |x| {
+    x + 1;
+}
+println!("{}", closure(5));
+//returns 6
 ~~~
