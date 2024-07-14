@@ -32,14 +32,14 @@ timesync() {
     EOF
 
     read -rd '' awk_overwrite_conf <<'EOF'
-    /NTP=/ {$0="NTP=" ip} 1
+    /NTP=/ && !/Fallback/ {$0="NTP=" ip} 1
     EOF
 
     get_status() {
         state=$(sudo timedatectl | awk -F ': ' "$awk_get_state")
         local old_IFS=$IFS
         IFS=$'\n' 
-        read -d "" -ra state_array <<< $state
+        read -d "" -ra state_array <<< "$state"
         IFS=":"
         for ((i=0;i<${#state_array[@]};i++))
         do
@@ -76,16 +76,6 @@ timesync() {
         awk -v ip="$1" "$awk_overwrite_conf" /tmp/timesyncd.conf.tmp > /etc/systemd/timesyncd.conf
     }
 
-    is_ip_valide() {
-        [[ $1 =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]] || return 1
-        local old_IFS=$IFS
-        IFS='.'
-        local ip_array=($1)
-        [[ ip_array[0] -le 255 && ip_array[1] -le 255 && ip_array[2] -le 255 && ip_array[3] -le 255 ]] || return 1
-        IFS=$old_IFS
-        return 0
-    }
-
     for ((i=1;i<=$#;i++))
     do
         case ${!i} in
@@ -93,13 +83,7 @@ timesync() {
             disable) disable_sync ;;
             set)
                 next_index=$((i + 1))
-                echo ${!next_index}
-                if is_ip_valide "${!next_index}"
-                then
-                    set_server ${!next_index}
-                else
-                    printf '%s\n' "Error: IP address is not valide"
-                fi
+                set_server ${!next_index}
                 ;;
             reload) do_reload ;;
             status) 
@@ -108,5 +92,5 @@ timesync() {
                 ;;
         esac
     done
-    }
+}
 ~~~
