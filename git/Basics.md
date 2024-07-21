@@ -43,9 +43,9 @@ git config [scope] user.name "<name>"
 git config [scope] user.email "<email>"
 ~~~
 scope:
-- --global &rarr; ~/.gitconfig
-- --local &rarr; .git/config (default)
-- --system &rarr; /etc/gitconfig
+- --global $\rarr$ ~/.gitconfig
+- --local $\rarr$ .git/config (default)
+- --system $\rarr$ /etc/gitconfig
 
 ## Files status
 Show status of the files:
