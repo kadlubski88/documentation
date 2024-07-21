@@ -69,3 +69,71 @@ sequenceDiagram
     UM ->> UT: remove the file
     S ->> UM: commit
 ~~~
+
+## Repository architecture
+There is three types of objects in the repository.
+- commit
+  - ID
+  - pointer to the parent commit(empty for initial commit, multiple after merge)
+  - message
+  - pointer to the root tree
+  - author, ...
+- tree (folder)
+  - ID
+  - pointer to all subtree and blobs in this tree(first level)
+- blob (file)
+  - ID
+  - content of the file
+
+IDs are the checksum of the content of the object (sha1).
+The checksum is also used to see if the content was changed.
+
+Branches and tags are pointers to a commit.
+
+The HEAD pointer point to the current checked out branch.
+
+## Branching/merging
+### Example
+~~~mermaid
+gitGraph
+  commit id: "3a365"
+  commit id: "c6d43"
+~~~
+~~~
+git chechout main
+~~~
+~~~mermaid
+%%{init: {'gitGraph': {'mainBranchName':'(HEAD)main'}}}%%
+gitGraph
+  commit id: "3a365"
+  commit id: "c6d43"
+~~~
+~~~
+git branch develop
+git checkout develop
+...
+git commit -m "message"
+~~~
+~~~mermaid
+gitGraph
+  commit id: "3a365"
+  commit id: "c6d43"
+  branch "(HEAD)develop"
+  checkout "(HEAD)develop"
+  commit id: "9bc84"
+~~~
+~~~
+git checkout main
+git merge develop
+~~~
+~~~mermaid
+%%{init: {'gitGraph': {'mainBranchName':'(HEAD)main'}}}%%
+gitGraph
+  commit id: "3a365"
+  commit id: "c6d43"
+  branch "develop"
+  checkout "develop"
+  commit id: "9bc84"
+  checkout "(HEAD)main"
+  merge "develop" id: "567f4"
+~~~
