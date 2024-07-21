@@ -46,3 +46,26 @@ scope:
 - --global &rarr; ~/.gitconfig
 - --local &rarr; .git/config (default)
 - --system &rarr; /etc/gitconfig
+
+## Files status
+Show status of the files:
+~~~
+git status
+~~~
+A file can have one of four different status:
+- **untracked**: files in the working directory that were not in the last snapshot and are not in the staging area.
+- **unmodified**: tracked files that match those in the repository.
+- **modified**: tracked files that doesnt math those in the repository.
+- **staged**: files that are added to the staging area(Changes to be committed).
+~~~mermaid
+sequenceDiagram
+    participant UT as untracked
+    participant UM as unmodified
+    participant M as modified
+    participant S as staged
+    UT ->> S: add the file
+    UM ->> M: edit the file
+    M ->> S: stage the file
+    UM ->> UT: remove the file
+    S ->> UM: commit
+~~~
