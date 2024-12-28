@@ -17,6 +17,43 @@ variable="$(< /path/to/file.txt)"
 ~~~bash
 ${#variable}
 ~~~
+## variable substitution
+if variable is undefined or an empty string <br>
+then return substitution <br>
+else return variable
+~~~bash
+echo ${variable:-"substitution"}
+# only if undefined:
+echo ${variable-"substitution"}
+~~~
+if variable is undefined or an empty string <br>
+then return an empty string
+else return substitution
+~~~bash
+echo ${variable:+"substitution"}
+# only if undefined:
+echo ${variable+"substitution"}
+~~~
+if variable is undefined or an empty string <br>
+then initialise variable with value
+~~~bash
+${variable:="value"}
+# only if undefined:
+${variable="value"}
+~~~
+if variable is undefined or an empty string <br>
+then <br>
+&emsp; if message is undefined <br>
+&emsp; then return a standard stderr and stop script <br>
+&emsp; else return message on stderr and stop script <br>
+else return variable
+~~~bash
+echo ${variable:?["message"]}
+# only if undefined:
+echo ${variable?["message"]}
+~~~
+
+
 
 ## predifined variables
 |variable|definition|
@@ -55,6 +92,18 @@ export $ENVIRONEMENT_VARIABLE
 ~~~
 
 ## array
+### define array
+~~~bash
+array=(value1 value2 value3)
+~~~
+### define dictionary
+~~~bash
+dictionary[key]=value
+~~~
+### get cell value
+~~~bash
+echo ${array[index/key]}
+~~~
 ### get length of an array
 ~~~bash
 ${#array[@]}
