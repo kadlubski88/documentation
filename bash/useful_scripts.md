@@ -12,3 +12,27 @@ get_ips() {
     done
 }
 ~~~
+
+## is IP address valide
+~~~bash
+is_ip_valide() {
+    [[ $1 =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]] || return 1
+    local old_IFS=$IFS
+    IFS='.'
+    local ip_array=($1)
+    [[ $((ip_array[0])) -le 255 && $((ip_array[1])) -le 255 && $((ip_array[2])) -le 255 && $((ip_array[3])) -le 255 ]] || return 1
+    IFS=$old_IFS
+    return 0
+}
+~~~
+
+## change host name
+~~~bash
+change_hostname() {
+    # TBD: cp hostname and hosts file in /tmp
+    hostname=$(< "$hostname_path")
+    echo "$1" > "$hostname_path"
+    # TBD: if sed failed -> restore file
+    sed -i "s/$hostname/$1/g" "$hosts_path" 
+}
+~~~
