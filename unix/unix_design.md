@@ -49,6 +49,7 @@ The main algorithms for managing the buffer cache are:
 - release buffer
 - read block
 - read block and read ahead
+- write block
 
 get block algorithm:
 ~~~
@@ -77,7 +78,7 @@ output: locked buffer ready to use
         remove buffer from free list;
         if (buffer marked for delayed write)
         {
-            asynchronus write buffer to disk;
+            asynchronous write buffer to disk;
             continue;
         }
         remove buffer from old hash queue;
@@ -128,7 +129,7 @@ output: buffer containing data
 read block and read ahead algorithm:
 ~~~
 input:  file system block number for immediate read
-        file system block number for asychronus read
+        file system block number for asychronous read
 output: buffer for immediate read
 {
     if (first block not in cache)
@@ -159,6 +160,24 @@ output: buffer for immediate read
         return buffer;
     }
 }    
+~~~
+
+write block algorithm:
+~~~
+input:  buffer
+output: none
+{
+    initiate disk write;
+    if (I/O snchronous)
+    {
+        sleep (event: I/O complete);
+        release buffer;
+    }
+    else if (buffer marked for delayed write)
+    {
+        mark buffer to put at head of free list;
+    }
+}
 ~~~
 
 ## Process
