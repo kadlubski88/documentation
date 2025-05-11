@@ -162,4 +162,10 @@ output: buffer for immediate read
 ~~~
 
 ## Process
+A process can run in two different modes:
+- user mode
+- kernel mode
+
+User and kernel mode uses two different stack.
+
 ![process state ttransition diagram](images/process_state_transition_diagram.png)
