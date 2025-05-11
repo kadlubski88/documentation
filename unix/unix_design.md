@@ -50,7 +50,7 @@ The main algorithms for managing the buffer cache are:
 - read block
 - read block and read ahead
 
-get block algorithme:
+get block algorithm:
 ~~~
 input:  file system number
         block number
@@ -87,7 +87,7 @@ output: locked buffer ready to use
 }
 ~~~
 
-release buffer algorithme:
+release buffer algorithm:
 ~~~
 input:  locked buffer
 output: none
@@ -108,7 +108,7 @@ output: none
 }
 ~~~
 
-read block algorithme:
+read block algorithm:
 ~~~
 input:  file system number
         block number
@@ -125,7 +125,7 @@ output: buffer containing data
 }
 ~~~
 
-read block and read ahead:
+read block and read ahead algorithm:
 ~~~
 input:  file system block number for immediate read
         file system block number for asychronus read
