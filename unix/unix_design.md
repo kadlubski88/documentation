@@ -175,7 +175,7 @@ output: none
     }
     else if (buffer marked for delayed write)
     {
-        mark buffer to put at head(end?) of free list;
+        mark buffer to put at head of free list;
     }
 }
 ~~~
