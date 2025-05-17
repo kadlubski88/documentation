@@ -45,13 +45,13 @@ A buffer header consist of 8 values:
 The status "delayed write" is used to minimise the IO operations to the disk. The data stays as long as possible in the buffer.
 
 The main algorithms for managing the buffer cache are:
-- get block
-- release buffer
-- read block
-- read block and read ahead
-- write block
+- get block (getblk)
+- release buffer (brelse)
+- read block (bread)
+- read block and read ahead (breada)
+- write block (bwrite)
 
-get block algorithm:
+getblk algorithm:
 ~~~
 input:  file system number
         block number
@@ -59,36 +59,39 @@ output: locked buffer ready to use
 {
     while (buffer not found) 
     {
-        if (buffer busy)
+        if (block in hash queue)
         {
-            sleep (event: buffer becomes free);
-            continue;
+            if (buffer busy)
+            {
+                sleep (event: buffer becomes free);
+                continue;
+            }
+            mark buffer busy;
+            remove buffer from free list;
+            return buffer;
         }
-        mark buffer busy;
-        remove buffer from free list;
-        return buffer;
-    }
-    else
-    {
-        if (no buffer on free list)
+        else
         {
-            sleep (event: any buffer becomes free);
-            continue;
+            if (no buffer on free list)
+            {
+                sleep (event: any buffer becomes free);
+                continue;
+            }
+            remove buffer from free list;
+            if (buffer marked for delayed write)
+            {
+                asynchronous write buffer to disk;
+                continue;
+            }
+            remove buffer from old hash queue;
+            put buffer to new hash queue;
+            return buffer;
         }
-        remove buffer from free list;
-        if (buffer marked for delayed write)
-        {
-            asynchronous write buffer to disk;
-            continue;
-        }
-        remove buffer from old hash queue;
-        put buffer to new hash queue;
-        return buffer;
     }
 }
 ~~~
 
-release buffer algorithm:
+brelse algorithm:
 ~~~
 input:  locked buffer
 output: none
@@ -109,13 +112,13 @@ output: none
 }
 ~~~
 
-read block algorithm:
+bread algorithm:
 ~~~
 input:  file system number
         block number
 output: buffer containing data
 {
-    getbuffer (file system and block number);
+    getblk (file system and block number);
     if (buffer data valide)
     {
         return buffer;
@@ -126,7 +129,7 @@ output: buffer containing data
 }
 ~~~
 
-read block and read ahead algorithm:
+breada algorithm:
 ~~~
 input:  file system block number for immediate read
         file system block number for asychronous read
@@ -134,14 +137,14 @@ output: buffer for immediate read
 {
     if (first block not in cache)
     {
-        get buffer for first block;
+        getblk for first block;
         if (buffer data not valid)
         {
             initiate disk read;
         }
         if (second block not in cache)
         {
-            get buffer for seconde block;
+            getblk for seconde block;
             if (buffer data valid)
             {
                 release buffer
@@ -162,7 +165,7 @@ output: buffer for immediate read
 }    
 ~~~
 
-write block algorithm:
+bwrite algorithm:
 ~~~
 input:  buffer
 output: none
@@ -179,6 +182,49 @@ output: none
     }
 }
 ~~~
+
+### Internal representation of files
+Every file has a unique inode (index node).
+The inode contains the information necessary for a process to access a file.
+
+The inode consist of:
+- File owner identifier
+    - uid
+    - gid
+- File type
+    - regular file
+    - directory
+    - character
+    - FIFO
+    - ...
+- File access permission
+    - for owner
+    - for group
+    - others
+- File access times
+    - last accessed
+    - last modification
+    - last inode change
+- Number of links
+- Table of contents for the disk adresses
+- File size
+
+To manipulate an inode, the kernel read it into an in-core inode. The in-core inode has additional fields:
+- status
+    - locked
+    - a process is waiting fot the inode to become unlocked
+    - in-core inode differs from the disk
+        - change of the inode
+        - change of the file data
+    - the file is a mount point
+- the logical device number
+- inode number
+- pointer to other inodes
+- count of active instances of the file.
+
+The management of the in-core inodes is similare to the management of the buffers.
+
+An inode can go back to the free list only if the count of active instances of the file is back to 0.
 
 ## Process
 A process can run in two different modes:
