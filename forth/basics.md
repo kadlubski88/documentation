@@ -1,4 +1,27 @@
 # Forth
+## Math (simple) operators
+|Word|Stack notation|
+|-|-|
+|+| n1 n2 -- (n1 + n2)|
+|-| n1 n2 -- (n1 - n2)|
+|*| n1 n2 -- (n1 * n2)|
+|/| n1 n2 -- (n1 / n2)|
+|MOD| n1 n2 -- (n1 % n2)|
+|/MOD| n1 n2 -- (n1 % n2) (n1 / n2)|
+## Stack manipulation operators
+|Word|Stack notation|
+|-|-|
+|SWAP| n1 n2 -- n2 n1|
+|2SWAP| n1 n2 n3 n4 -- n3 n4 n1 n2 
+|DUP| n -- n n|
+|2DUP| n1 n2 -- n1 n2 n1 n2|
+|OVER| n1 n2 -- n1 n2 n1|
+|2OVER| n1 n2 n3 n4 -- n1 n2 n3 n4 n1 n2|
+|ROT| n1 n2 n3 -- n2 n3 n1|
+|-ROT| n1 n2 n3 -- n3 n2 n1|
+|2ROT| n1 n2 n3 n4 n5 n6 -- n3 n4 n5 n6 n1 n2| 
+|DROP| n --|
+|2DROP| n1 n2 --|
 ## Forth on Arduino nano v3 (ard nano v4)
 ### Installation
 - Arduino UNO as an ISP programmer
