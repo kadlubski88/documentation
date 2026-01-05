@@ -22,6 +22,11 @@
 |2ROT| n1 n2 n3 n4 n5 n6 -- n3 n4 n5 n6 n1 n2| 
 |DROP| n --|
 |2DROP| n1 n2 --|
+## Time operators
+|Word|Stack notation|Comment|
+|-|-|-|
+|ms| n --| wait for at least n ms|
+|uptime| -- d| get time in us since epoch| 
 ## Forth on Arduino nano v3 (ard nano v4)
 ### Installation
 - Arduino UNO as an ISP programmer
