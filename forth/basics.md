@@ -22,6 +22,34 @@
 |2ROT| n1 n2 n3 n4 n5 n6 -- n3 n4 n5 n6 n1 n2| 
 |DROP| n --|
 |2DROP| n1 n2 --|
+## Comparison operators
+|operator|Stack notation|
+|-|-|
+|=| n1 n2 -- (n1 == n2)|
+|<>| n1 n2 -- (n1 != n2)|
+|<| n1 n2 -- (n1 < n2)|
+|>| n1 n2 -- (n1 > n2)|
+|U<| u1 u2 -- (u1 < u2)|
+|U>| u1 u2 -- (u1 > u2)|
+|0=| n -- (n == 0)|
+|0<| n -- (n < 0)|
+|0>| n -- (n > 0)|
+## Condition
+~~~forth
+IF ... ELSE ... THEN
+~~~
+IF reads the stack and compare to 0 (false). If it is not false, the words after IF until ELSE or THEN will be called. If it is false, then it's jump to ELSE or THEN (if ELSE not exists). The words after THEN will be always called.
+
+IF can be nested in other IFs
+~~~forth
+DUP IF ... ELSE
+DUP IF ... ELSE
+IF ... ELSE
+THE THEN THEN
+~~~
+
+ABORT" ..." will abort the codition and write a string to the std output.
+
 ## Time operators
 |Word|Stack notation|Comment|
 |-|-|-|
