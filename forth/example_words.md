@@ -49,4 +49,22 @@ OR
 > |<=|(hi < n) (lo <= n)|
 > |AND|(hi < n) AND (lo <= n)|
 
+## Reverse star parallelogram
+~~~forth
+: /STARS (n1 n2 --) --->/10 3 
+    CR DUP 0            /10 3 3 0
+    +DO                 /10 3               + 10 2
+        1 - DUP 0       /10 2 2 0           | 10 1 1 0
+        +DO             /10 2               | 10 1
+            32 emit     /Print 2 spaces     | 10 1
+        LOOP            /10 2               | 10 1
+        OVER 0          /10 2 10 0          | 10 1 10 0
+        +DO             /10 2               | 10 1
+            ." *"       /Print 10 stars     | 10 1
+        LOOP            /10 2               | 10 1
+        CR              /10 2               |
+    LOOP                /------------------>+
+    DROP DROP           /Clean up the stack
+;
+~~~
 
