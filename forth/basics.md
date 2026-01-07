@@ -48,7 +48,15 @@ IF ... ELSE
 THE THEN THEN
 ~~~
 
-ABORT" ..." will abort the codition and write a string to the std output.
+~~~forth
+ABORT" ..."
+~~~
+will abort the codition and write a string to the std output.
+
+~~~forth
+EXIT
+~~~
+ to exit the condition prematurely.
 
 ## Time operators
 |Word|Stack notation|Comment|
