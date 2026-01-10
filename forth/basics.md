@@ -58,6 +58,41 @@ EXIT
 ~~~
  to exit the condition prematurely.
 
+## Base
+|Word|Stack notation|Comment|
+|-|-|-|
+|DECIMAL| -- | Set base to ten|
+|HEX| -- | Set base to 16|
+|OCTAL| -- | Set base to 8|
+
+Create not prefined base converter:
+~~~forth
+: BINARY 2 BASE ! ; \example for base 2
+~~~
+
+## Print
+|Word|Stack notation|Comment|
+|-|-|-|
+|EMIT|u --|Print an ascii character|
+|.|n --|Print single length signed number|
+|U.|u --|Print single length unsigned number|
+|D.|n1 n2 --|Print double length signed number|
+|UD.|u1 u2 --|Print double length unsigned number|
+
+## Return stack
+|Word|Stack notation|Comment|
+|-|-|-|
+|>R|n --|Put return stack|
+|R@|-- n|Fetch return stack|
+|R>|-- n|Pop return stack|
+|RDROP|--|Drop from return stack|
+
+## Shebang
+~~~forth
+#! /usr/bin/env gforth
+~~~
+> A space is needed between #! and the rest. So will gforth see this line as a comment.
+
 ## Time operators
 |Word|Stack notation|Comment|
 |-|-|-|
