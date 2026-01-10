@@ -68,3 +68,44 @@ OR
 ;
 ~~~
 
+## Print ASCII table
+~~~forth
+: .ASCII ( -- )
+    CR 127 32 
+    +DO 
+        DECIMAL I . ." : " HEX I . ." : " I EMIT CR
+    LOOP
+    DECIMAL
+;
+.ASCII
+BYE
+~~~
+
+## Print endless diamants
+~~~forth
+: DIAMANT ( n -- )
+    >R
+    1 1
+    BEGIN
+        DUP R@ SWAP - SPACES 
+        DUP 2 * 0 
+        +DO   
+            ." *"
+        LOOP
+        DUP R@ >=
+        IF
+            SWAP DROP -1 SWAP
+        THEN
+        DUP 1 <=
+        IF 
+            SWAP DROP 1 SWAP
+        THEN
+        OVER +
+        CR
+        20 MS
+    AGAIN
+;
+20 DIAMANT
+BYE
+~~~
+
