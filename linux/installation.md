@@ -79,20 +79,30 @@ How to install different Linux distros from an existing distro (Ubuntu)
 14. [optional] Set keyboard configuration
     ~~~bash
     apt install keyboard-configuration
+    setupcon
     ~~~
-15. Exit chroot
+15. [optional] Install console configuration tool
+    ~~~bash
+    apt install console-setup
+    ~~~ 
+16. [optional] Install dbus
+    Needed for localctl, timedatectl,...
+    ~~~bash
+    apt install dbus
+    ~~~
+17. Exit chroot
     ~~~bash
     exit
     ~~~
-16. Configure grub
+18. Configure grub
     ~~~bash
     sudo nano /etc/default/grub
     # uncomment GRUB_DISABLE_OS_PROBER=false
     # set GRUB_TIMEOUT=10
     ~~~
-17. Update grub
+19. Update grub
     ~~~bash
     sudo grub-mkconfig -o /boot/grub/grub.cfg
     ~~~
-18. Reboot
+20. Reboot
 ## Arch
