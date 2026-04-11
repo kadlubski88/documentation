@@ -99,6 +99,16 @@ man systemd.unit
 ## Target
 A systemd target is a group of other units (service, path, mount points, socket, other targets)for a particular purpose.
 
+### List all active targets
+~~~bash
+systemctl list-units -t target
+~~~
+
+### List all inactive targets
+~~~bash
+systemctl list-units -t target --state inactive
+~~~
+
 ### Important targets
 |target|description|
 |-|-|
