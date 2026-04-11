@@ -95,3 +95,27 @@ Relevant when enabling
 ~~~bash
 man systemd.unit
 ~~~
+
+## Target
+A systemd target is a group of other units (service, path, mount points, socket, other targets)for a particular purpose.
+
+### Important targets
+|target|description|
+|-|-|
+|multi-user|OS fully operational in text mode|
+|graphical|OS fully perational in graphical mode|
+|rescue|Small system only for root(maintenance)|
+|emergency|Minimal system for recovery|
+
+### Change default target
+get actual default target:
+~~~bash
+systemctl get-default
+~~~
+temporarly:
+~~~bash
+systemctl isolate <target name>
+~~~
+persistent:
+~~~bash
+systemctl set-default <target name>
