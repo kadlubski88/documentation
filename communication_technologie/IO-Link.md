@@ -30,7 +30,7 @@ IO-Link is a standardised(IEC 61131-9) Input/Output technologie to communicate w
 - **definition:** 
   - logical 1 &rbarr; (C/Q) - (L-) = 0V
   - logical 0 &rbarr; (C/Q) - (L-) = 24V
-- **rate:** 4.8 to 230.4 kBauld
+- **rate:** 4.8 to 230.4 kBaud
 
 ## description
 IO-Link devices, like sensors or actores, are connected to a IO-Link Master. The master is the gateway between the devices and a higher level controller.<br>

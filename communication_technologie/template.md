@@ -25,7 +25,7 @@ short description
 - **definition:** CMOS | TTL 3.3V | TTL 5V |
   - logical 1 &rbarr; B - A >= 2V
   - logical 0 &rbarr; B - A < 0.2V
-- **rate:** XXX Bauld
+- **rate:** XXX Baud
 
 ## description
 full description
