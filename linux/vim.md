@@ -56,7 +56,7 @@
 ## Copying text
 |Key|Action|
 |---|--------|
-|`"``x`|Use register x for the next yank, delete or put|
+|`` " `` `x`|Use register x for the next yank, delete or put|
 |`yy`|Copy the line|
 |`y` `motion`or`selectio`|Yank|
 |`v`|Enter visual mode|
