@@ -21,10 +21,15 @@
 |Key|Action|
 |---|--------|
 |`i`|Enter insert mode at the cursor|
+|`I`|Enter insert mode at the begining of the line|
 |`a`|Enter insert mode after the cursor|
 |`A`|Enter insert mode at the end of the line|
+|`o`|Open a line under the cursor and enter insert mode|
+|`O`|Open a line over the cursor and enter insert mode|
 |`x`|Remove the character under the cursor|
 |`d` `motion`|Delete from the cursor before the motion, to the cursor after the motion|
+|'diw`|Delete the word where the word where the cursor is (inner)|
+|'daw`|Delete the word where the word where the cursor is. (around)|
 |`dd`|Remove the all line|
 |`r` `character`|Replace the character under the cursor with the given character| 
 |`R` `characters`|Replace the next characters with the given characters|
@@ -32,3 +37,11 @@
 |`P`|Put the last removed character(s) before the cursor|
 |`c` `motion`|Remove the character(s) like `d`, but enter insert mode right after| 
 |`cc`|Remove the all line and enter insert mode|
+
+## Commands
+|Command|Action|
+|-------|------|
+|set number|Enable line numbering|
+|set relativenumber|Enable relative line numbering|
+|set hlsearch|Enable search highlight|
+|noh|Reset current hightlighting|
