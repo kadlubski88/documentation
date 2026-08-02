@@ -51,7 +51,7 @@
 |`[`or`]`|In [] brackets written text|
 |`{`or`}`|In {} brackets written text|
 |`<`or`>`|In <> brackets written text|
-|`'`or`"`or`\``|In quotes written text|
+|`'`or`"`or`` ` ``|In quotes written text|
 
 ## Copying text
 |Key|Action|
