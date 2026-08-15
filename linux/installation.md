@@ -105,4 +105,3 @@ How to install different Linux distros from an existing distro (Ubuntu)
     sudo grub-mkconfig -o /boot/grub/grub.cfg
     ~~~
 20. Reboot
-## Arch
