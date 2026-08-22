@@ -266,6 +266,21 @@ Login as the new user
 logout
 ~~~
 
+### Yay
+Install nedded packages:
+~~~
+sudo pacman -S git base-develop
+~~~
+Clone yay git repository:
+~~~
+git clone https://aur.archlinux.org/yay.git
+~~~
+Inside yay folder make package:
+~~~
+cd yay
+makepkg -si
+~~~
+
 ### Hyprland
 Install hyprland and the most important packages:
 ~~~
