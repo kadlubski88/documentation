@@ -275,3 +275,27 @@ Start hyprland:
 ~~~
 start-hyprland
 ~~~
+
+### Sound
+Install pipewire:
+~~~
+sudo pacman -Rns pulseaudio
+sudo pacman -S pipewire wireplumber pipewire-pulse pipewire-alsa
+~~~
+Install ALSA utitilty
+~~~
+sudo pacman -S alsa-utils
+~~~
+Look for kernel errors:
+~~~
+sudo dmesg | grep -iE 'snd|sof|hda|audio' | tail -100
+~~~
+For sof error:
+~~~
+sudo pacman -S sof-firmware
+~~~
+Control if soundcard is found:
+~~~
+cat /proc/asound/cards
+~~~
+> NOTE: Need to reboot to make it works
